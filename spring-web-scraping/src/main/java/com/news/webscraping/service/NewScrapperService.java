@@ -12,4 +12,6 @@ public interface NewScrapperService {
 
 	List<NewScrapperItem> searchAuthors(String author);
 
+	NewScrapperItem searchTitle(String title);
+
 }

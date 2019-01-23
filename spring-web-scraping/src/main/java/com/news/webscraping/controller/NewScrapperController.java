@@ -42,4 +42,10 @@ public class NewScrapperController {
 		model.addAttribute("titleList", service.searchAuthors(item.getAuthor()));
 		return "title";
 	}
+	
+	@RequestMapping(value = "/searchTitle", method = RequestMethod.POST)
+	public String searchTitle(@ModelAttribute("attr2") NewScrapperItem item, Model model) {
+		model.addAttribute("total", service.searchTitle(item.getTitle()));
+		return "final";
+	}
 }

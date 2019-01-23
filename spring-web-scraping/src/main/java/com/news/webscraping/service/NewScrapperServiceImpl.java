@@ -2,6 +2,7 @@ package com.news.webscraping.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.news.webscraping.model.NewScrapperItem;
 
@@ -94,6 +96,17 @@ public class NewScrapperServiceImpl implements NewScrapperService {
 		List<NewScrapperItem> titleList = articles.stream().filter(predicate -> predicate.getAuthor().equals(author))
 				.collect(Collectors.toList());
 		return titleList;
+	}
+
+	@Override
+	public NewScrapperItem searchTitle(String title) {
+		List<NewScrapperItem> scraperItem = articles.stream().filter(predicate -> predicate.getTitle().equals(title))
+				.collect(Collectors.toList());
+		if(CollectionUtils.isEmpty(scraperItem)) {
+			return null;
+		}else {
+			return scraperItem.get(0);
+		}
 	}
 
 }
